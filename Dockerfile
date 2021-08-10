@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM debian:stable-slim
 
 # Install base dependencies
 RUN apt-get update \

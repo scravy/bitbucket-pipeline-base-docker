@@ -34,6 +34,11 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# aws-iam-authenticator
+RUN bash -c 'curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/aws-iam-authenticator' \
+  && chmod +x ./aws-iam-authenticator \
+  && mv ./aws-iam-authenticator /usr/local/bin/
+
 # eksctl
 RUN bash -c 'curl -s -L0 "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp' \
     && mv /tmp/eksctl /usr/local/bin \
@@ -42,7 +47,7 @@ RUN bash -c 'curl -s -L0 "https://github.com/weaveworks/eksctl/releases/latest/d
 # kubectl
 RUN bash -c 'curl -s -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"' \
     && chmod +x ./kubectl \
-    && mv ./kubectl /usr/local/bin/kubectl \
+    && mv ./kubectl /usr/local/bin/ \
     && kubectl version --client
 
 

@@ -1,5 +1,10 @@
 FROM ubuntu:20.04
 
+# Default to UTF-8 file.encoding
+ENV LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8 \
+    LANGUAGE=C.UTF-8
+
 # Install base dependencies
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get -qq install \
@@ -7,7 +12,6 @@ RUN apt-get update \
         build-essential \
         apt-transport-https \
         ca-certificates \
-        wget \
         curl \
         git \
         jq \
@@ -18,20 +22,21 @@ RUN apt-get update \
         python3 \
         python3-pip \
         python3-dev \
-        libpq-dev \
+    && pip3 install --no-cache-dir \
+        pyyaml \
+        jinsi \
+        boto3 \
+        docker-compose \
+    && DEBIAN_FRONTEND=noninteractive apt-get -qq purge \
+        build-essential \
+        python3-pip \
+        python3-dev \
+    && DEBIAN_FRONTEND=noninteractive apt-get -qq autoremove --purge \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
-
-# Default to UTF-8 file.encoding
-ENV LANG=C.UTF-8 \
-    LC_ALL=C.UTF-8 \
-    LANGUAGE=C.UTF-8
-
-# Install useful python tools & docker-compose
-RUN pip3 install --no-cache-dir \
-    pyyaml \
-    jinsi \
-    docker-compose
+    && docker-compose --version \
+    && python --version \
+    && jinsi --version
 
 # aws cli
 RUN bash -c 'curl -s "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"' \

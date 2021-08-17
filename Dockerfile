@@ -30,12 +30,11 @@ RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get -qq purge \
         build-essential \
         python3-pip \
-        python3-dev \
     && DEBIAN_FRONTEND=noninteractive apt-get -qq autoremove --purge \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && docker-compose --version \
-    && python --version \
+    && python3 --version \
     && jinsi --version
 
 # aws cli

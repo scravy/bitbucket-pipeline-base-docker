@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM debian:bullseye-slim
 
 # Default to UTF-8 file.encoding
 ENV LANG=C.UTF-8 \

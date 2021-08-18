@@ -37,13 +37,6 @@ RUN apt-get update \
     && python3 --version \
     && jinsi --version
 
-# aws cli
-RUN bash -c 'curl -s "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"' \
-    && unzip -q awscliv2.zip \
-    && ./aws/install \
-    && aws --version
-    && rm -rf /var/lib/apt/lists/*
-
 # eksctl
 RUN bash -c 'curl -s -L0 "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp' \
     && mv /tmp/eksctl /usr/local/bin \

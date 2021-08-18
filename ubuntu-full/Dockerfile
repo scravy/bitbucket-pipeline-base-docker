@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM ubuntu:20.04
 
 # Default to UTF-8 file.encoding
 ENV LANG=C.UTF-8 \
@@ -46,7 +46,7 @@ RUN bash -c 'curl -s "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" 
 
 # eksctl
 RUN bash -c 'curl -s -L0 "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp' \
-    && mv /tmp/eksctl /usr/local/bin \
+    && mv /tmp/eksctl /usr/local/bin/eksctl \
     && eksctl version
 
 # kubectl

@@ -44,13 +44,13 @@ RUN bash -c 'curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazo
 
 # eksctl
 RUN bash -c 'curl -s -L0 "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp' \
-    && mv /tmp/eksctl /usr/local/bin \
+    && mv /tmp/eksctl /usr/local/bin/eksctl \
     && eksctl version
 
 # kubectl
 RUN bash -c 'curl -s -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"' \
     && chmod +x ./kubectl \
-    && mv ./kubectl /usr/local/bin/ \
+    && mv ./kubectl /usr/local/bin/kubectl \
     && kubectl version --client
 
 

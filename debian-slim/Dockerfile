@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM public.ecr.aws/debian/debian:bookworm-slim
 
 # Default to UTF-8 file.encoding
 ENV LANG=C.UTF-8 \
